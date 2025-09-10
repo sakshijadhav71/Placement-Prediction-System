@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Placement Predictor</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="assets/css/app.css" rel="stylesheet">
+        <link href="assets/css/bootstrap/bootstrap-icons.min.css" rel="stylesheet">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid loader">
+            <div class="loader-body">
+                <img src="assets/images/loader.gif" />
+            </div>
+        </div>
+
+        <div class="app-sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+            <div class="offcanvas-header">
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="assets/images/app-logo.png" />
+                </a>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body px-0">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="#">
+                            <i class="bi bi-search"></i>Predictor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="results.html">
+                            <i class="bi bi-book"></i>Results
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       
+        <nav class="app-navbar pt-3 pb-3">
+            <div class="container-fluid">
+                <div class="app-navbar-content">
+                    <div class="app-nav-icon">
+                        <button class="sidebar-toggle-btn btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
+                            <i class="bi bi-grid-3x3-gap-fill" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
+                        </button>
+                    </div>
+                    <div class="app-nav-heading">
+                        <h4 class="text-white">Placement Prediction System</h4>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="app-nav-pills container-fluid pt-2 bg-white">
+            <div class="container">
+                <ul class="nav nav-pills nav-justified" id="AppTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="step1-tab">
+                            <i class="bi bi-check-circle pills-progress-ic proceed"></i>Personal details
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="step2-tab">
+                            <i class="bi bi-check-circle pills-progress-ic"></i>Educational skills
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="step3-tab">
+                            <i class="bi bi-check-circle pills-progress-ic"></i>Professional skills
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="step4-tab">
+                            <i class="bi bi-check-circle pills-progress-ic"></i>Result
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-container container mt-4 p-4 bg-white">
+            <form class="app-form" name="predictor-form" id="predictor-form">
+                <div class="tab-content" id="AppTabContent">
+                    <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                        <h4>1. Personal Details</h4>
+                        <div class="row mt-4">
+                            <div class="col-md-6 ">
+                                <div class="form-input mb-4">
+                                    <label for="field1" class="form-label label">Name</label>
+                                    <input type="text" placeholder="Enter Your Name" class="form-control input" name="name" id="field1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-input mb-4">
+                                    <label for="field2" class="form-label label">Class</label>
+                                    <input type="text" placeholder="Enter Your Class" class="form-control input" name="class" id="field2" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions border-top bg-white px-4">
+                            <button type="button" data-cur-id="step1" data-id="step2" class="btn btn-primary next_btn">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                        <h4>2. Educational Skills</h4>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="form-input mb-4">
+                                    <label for="field1" class="form-label label">Academic Performance</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="academic_performance" id="field1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field2" class="form-label label">Technical Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="technical_skills" id="field2" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field3" class="form-label label">Core Knowledge</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="core_knowledge" id="field3" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field4" class="form-label label">Puzzle Solving</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="puzzle_solving" id="field4" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field5" class="form-label label">Programming Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="programming_skills" id="field5" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field6" class="form-label label">Group Discussion Score</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="group_discussion" id="field6" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field7" class="form-label label">Project</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter No Of Project" class="form-control input" name="project" id="field7" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field8" class="form-label label">Internship</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter No Of Internship" class="form-control input" name="internship" id="field8" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-input">
+                                    <label for="field9" class="form-label label">Backlog</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter No Of Backlog" class="form-control input" name="backlog" id="field9" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions border-top bg-white px-4">
+                            <button type="button" data-cur-id="step2" data-id="step1" class="btn btn-primary priv_btn">Back</button>
+                            <button type="button" data-cur-id="step2" data-id="step3" class="btn btn-primary next_btn">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+                        <h4>3. Professional Skills</h4>
+                        <div class="row">
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field10" class="form-label label">Coding Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="coding_skills" id="field10" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field11" class="form-label label">Aptitude Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="aptitude_skills" id="field11" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field12" class="form-label label">Communication Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="communication_skills" id="field12" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field13" class="form-label label">Presentation Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="presentation_skills" id="field13" required>
+                                </div>
+                            </div>  
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field14" class="form-label label">English Proficiency</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="english_proficiency" id="field14" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field15" class="form-label label">Management Skills</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="management_skills" id="field15" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-input">
+                                    <label for="field16" class="form-label label">Training</label>
+                                    <input type="number" min="0" max="100" placeholder="Enter Score In %" class="form-control input" name="training" id="field16" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions border-top bg-white px-4">
+                            <div class="form-button-prev-next">
+                                <button type="button" data-cur-id="step3" data-id="step2" class="btn btn-primary priv_btn">Back</button>
+                                <button type="submit" id="form_submit" class="btn btn-primary">Predict</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="step4" role="tabpanel" aria-labelledby="step4-tab">
+                        <h4>4. Result</h4>
+                        <div class="final-result pt-4">
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script>
+            function nextTrigger(next_tab_id,cur_tab_id){
+                $('#AppTabContent').find('.tab-pane.fade.show.active').removeClass(['active','show']);
+                $('#'+next_tab_id).addClass(['active','show']);
+                $('#'+cur_tab_id+'-tab').removeClass('active');
+                var nextTab = $('#'+next_tab_id+'-tab');
+                nextTab.addClass('active').find('.pills-progress-ic').addClass('proceed');
+            }
+
+            function returntHTML(result = 0){
+                html = '';
+                if(result > 70){
+                    html = '<i class="bi bi-emoji-heart-eyes result-pass"></i><span class="text-center text-secondary pt-2">Congratulations, you are doing well! <br> Your placement chances are <strong>'+result+'%</strong></span><br><button class="btn btn-primary form-reload-btn mt-4 mb-5" type="reset" onclick="window.location.reload()" type="button">New Prediction</button>';
+                }else if(result > 45){
+                    html = '<i class="bi bi-emoji-smile result-modrate"></i><span class="text-center text-secondary pt-2">You need to prepare well! <br> Your placement chances are <strong>'+result+'%</strong></span><br><button class="btn btn-primary form-reload-btn mt-4 mb-5" type="reset" onclick="window.location.reload()" type="button">New Prediction</button>';
+                }else{
+                    html = '<i class="bi bi-emoji-frown result-low"></i><span class="text-center text-secondary pt-2">Sorry, your need to improve your skills! <br> Your placement chances are <strong>'+result+'%</strong></span><br><button class="btn btn-primary form-reload-btn mt-4 mb-5" type="reset" onclick="window.location.reload()" type="button">New Prediction</button>'
+                }
+
+                return html;
+            }
+
+            $(document).ready(function(){
+                $('.next_btn').click(function(){
+                    var next_tab_id = $(this).attr('data-id');
+                    var cur_tab_id = $(this).attr('data-cur-id');
+                    var len = $('#'+cur_tab_id).find('input:invalid').length;
+
+                    if(len > 0){
+                        $('#form_submit').click();
+                        console.clear();
+                        return;
+                    }
+                    
+					if(cur_tab_id == "step1"){
+						var name = $('#field1').val();
+						var cls = $('#field2').val();
+						
+						if(name.length > 0 && cls.length > 0){
+							$.ajax({
+								url:'http:localhost:8081/validate',
+								type: 'GET',
+								dataType: 'JSON',
+								data: 'name='+name+'&class='+cls,
+								beforeSend: function(){
+									$('.loader').show();
+								},
+								success:function(resp){
+									setTimeout(function(){
+
+                                        if(resp.response.count !== undefined && resp.response.count > 0){
+                                            
+                                            alert('Prediction already calculated for user "'+name+'"!');
+                                            alert('You are redirected to result page!');
+                                            var result = resp.response.data[0].result;
+
+                                            $('.pills-progress-ic').addClass('proceed');
+
+                                            $('#AppTabContent').find('.tab-pane.active').removeClass(['active','show']);                                        
+                                            $('#AppTabContent').find('.tab-pane:last-child').addClass(['active','show']);
+
+                                            $('#AppTab').find('.nav-link.active').removeClass('active');
+                                            $('#AppTab').find('.nav-item:last-child .nav-link').addClass('active');
+
+                                            let html = returntHTML(result)
+                                            
+                                            jQuery('.final-result').html(html);
+                                        }else{
+                                            nextTrigger(next_tab_id,cur_tab_id);
+                                        }
+
+										$('.loader').hide();
+									},1000);
+								},
+                                error: function(e){
+                                    $('.loader').hide();
+                                    alert('Someting Wents To Wrong With API!');
+                                    alert('Please check API IS Live and Try Again!')
+                                }
+							});        
+                            return;
+						}
+					}
+
+                    nextTrigger(next_tab_id,cur_tab_id);
+                });
+
+                $('.priv_btn').click(function(){
+                    var tab_id = $(this).attr('data-id');
+                    var cur_tab_id = $(this).attr('data-cur-id');
+                    
+                    jQuery('#AppTabContent').find('.tab-pane.fade.show.active').removeClass(['active','show'])
+                    jQuery('#'+tab_id).addClass(['active','show']);
+                    jQuery('#'+cur_tab_id+'-tab').removeClass('active');
+                    jQuery('#'+cur_tab_id+'-tab').find('.pills-progress-ic').removeClass('proceed');
+                    jQuery('#'+tab_id+'-tab').addClass('active');
+
+                });
+                
+                $("#predictor-form").on('submit',function(e){
+                    e.preventDefault();
+                    var form = document.getElementById('predictor-form'); 
+                    var formData = new FormData(form); 
+               
+                    $.ajax({
+                        url:'http:localhost:8081/predict',
+                        method: 'POST', 
+                        data: formData, 
+                        processData: false, 
+                        contentType: false, 
+                        beforeSend: function(){
+                            $('.loader').show();
+                        },
+                        success:function(resp){
+                            setTimeout(function(){
+                                $('.loader').hide();
+                                if(resp.result != undefined){
+                                    var result = parseInt(resp.result);
+
+                                    let html = returntHTML(result)
+                                    
+                                    jQuery('.final-result').html(html);
+
+                                    jQuery('#AppTabContent').find('.tab-pane.fade.show.active').removeClass(['active','show'])
+                                    jQuery('#step4').addClass(['active','show']);
+                                    jQuery('#step3-tab').removeClass('active');
+                                    jQuery('#step4-tab').find('.pills-progress-ic').addClass('proceed');
+                                    jQuery('#step4-tab').addClass('active');
+                                }
+                            },2000);  
+                        },
+                        error: function(e){
+                            $('.loader').hide();
+                            alert('Someting Wents To Wrong With API!');
+                            alert('Please check API IS Live and Try Again!')
+                        }
+                    });
+                })
+            });
+        </script>
+    </body>
+</html>
